@@ -1,5 +1,6 @@
 \ProvidesClass{keros-cv}[2012/04/30 CV class]
 \NeedsTeXFormat{LaTeX2e}
+\RequirePackage{fixltx2e}
 
 \DeclareOption{print}{\def\@cv@print{}}
 \DeclareOption*{%
@@ -49,13 +50,17 @@
 
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+\RequirePackage[greek,english]{babel}
+%\RequirePackage[default]{sourcesanspro}
+%\RequirePackage[scaled=.95]{sourcecodepro}
+\setsansfont{TeX Gyre Heros}
 
-\newfontfamily\bodyfont[]{Source Sans Pro}
-\newfontfamily\thinfont[]{Source Sans Pro ExtraLight}
-\newfontfamily\headingfont[]{Source Sans Pro Black}
-
+\newfontfamily\bodyfont[]{TeX Gyre Heros}
+\newfontfamily\thinfont[]{TeX Gyre Heros}
+\newfontfamily\headingfont[]{TeX Gyre Heros Bold}
+\newfontfamily\headingitalicfont[]{TeX Gyre Heros Bold Italic}
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor, Script=Greek, Ligatures=TeX]{Source Sans Pro Light}
+\setmainfont[Mapping=tex-text, Color=textcolor, Script=Greek, Ligatures=TeX]{TeX Gyre Heros}
 
 %\setmathfont{XITS Math}
 
@@ -73,8 +78,8 @@
 
 \newcommand{\header}[3]{%
   \begin{tikzpicture}[remember picture,overlay]
-    \node [rectangle, fill=fillheader, anchor=north, minimum width=\paperwidth, minimum height=4cm] (box) at (current page.north){};
-    \node [anchor=center] (name) at (box) {%
+    \node [rectangle, fill=fillheader, anchor=north, minimum width=\paperwidth, minimum height=3.5cm] (box) at (current page.north){};
+    \node [left=8.5em,below=1.5em] (name) at (box) {%
       \color{header}%
       {\fontsize{28pt}{70pt}\thinfont #1}{\fontsize{30pt}{72pt}\bodyfont  #2}
     };
@@ -128,9 +133,11 @@
 \pagestyle{empty}
 
 
+
 %%%%%%%%%%%%%%%%%%%%
 % List environment %
 %%%%%%%%%%%%%%%%%%%%
+\RequirePackage{paralist}
 
 \setlength{\tabcolsep}{0pt}
 \newenvironment{entrylist}{%
@@ -138,7 +145,7 @@
 }{%
   \end{tabular*}
 }
-\renewcommand{\bfseries}{\headingfont\color{headercolor}}
+\renewcommand{\bfseries}{\headingitalicfont\color{headercolor}}
 \newcommand{\entry}[4]{%
   #1&\parbox[t]{11.8cm}{%
     \textbf{#2}%
@@ -146,6 +153,8 @@
     {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
     #4\vspace{\parsep}%
   }\\}
+  
+  
 
 
 %%%%%%%%%%%%%%
@@ -160,7 +169,7 @@
   \renewcommand{\section}[1]{
     \par\vspace{\baselineskip}{\Large\headingfont\color{headercolor} ##1}
   }
-  \begin{textblock}{3.6}(1.5, 4.33)
+  \begin{textblock}{3.6}(1.4, 3.85)
   \begin{flushright}
   \obeycr
 }{%
@@ -300,10 +309,20 @@
 %}
 %
 
-
 %%%%%%%%%%%%%%%%
 % Other tweaks %
 %%%%%%%%%%%%%%%%
 
-\RequirePackage[left=6.1cm,top=2cm,right=1.5cm,bottom=1cm,nohead,nofoot]{geometry}
+\RequirePackage[left=6.1cm,top=1.5cm,right=1.5cm,bottom=0.5cm,nohead,nofoot]{geometry}
 \RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=false,       
+    linkcolor=red,          
+    citecolor=red,        
+    filecolor=red,      
+    urlcolor = red}
+    
+% A fix for \href{}{} colors not working with fontspec
+\makeatletter
+\def\HyColor@@@@UseColor#1\@nil{\addfontfeatures{Color=#1}}
+\makeatother
