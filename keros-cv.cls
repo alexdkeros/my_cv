@@ -6,6 +6,9 @@
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption}{article}%
 }
+
+\PassOptionsToClass{a4paper}{article}
+
 \ProcessOptions\relax
 \LoadClass{article}
 
@@ -53,14 +56,14 @@
 \RequirePackage[greek,english]{babel}
 %\RequirePackage[default]{sourcesanspro}
 %\RequirePackage[scaled=.95]{sourcecodepro}
-\setsansfont{TeX Gyre Heros}
+\setsansfont{Arial}
 
-\newfontfamily\bodyfont[]{TeX Gyre Heros}
-\newfontfamily\thinfont[]{TeX Gyre Heros}
-\newfontfamily\headingfont[]{TeX Gyre Heros Bold}
-\newfontfamily\headingitalicfont[]{TeX Gyre Heros Bold Italic}
+\newfontfamily\bodyfont[]{Arial}
+\newfontfamily\thinfont[]{Arial}
+\newfontfamily\headingfont[]{Arial Bold}
+\newfontfamily\headingitalicfont[]{Arial Bold}
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor, Script=Greek, Ligatures=TeX]{TeX Gyre Heros}
+\setmainfont[Mapping=tex-text, Color=textcolor, Script=Greek, Ligatures=TeX]{Arial}
 
 %\setmathfont{XITS Math}
 
@@ -78,10 +81,10 @@
 
 \newcommand{\header}[3]{%
   \begin{tikzpicture}[remember picture,overlay]
-    \node [rectangle, fill=fillheader, anchor=north, minimum width=\paperwidth, minimum height=3.5cm] (box) at (current page.north){};
-    \node [left=8.5em,below=1.5em] (name) at (box) {%
+    \node [rectangle, fill=fillheader, anchor=north, minimum width=\paperwidth, minimum height=3.7cm] (box) at (current page.north){};
+    \node [left=9.8em,below=1.5em] (name) at (box) {%
       \color{header}%
-      {\fontsize{28pt}{70pt}\thinfont #1}{\fontsize{30pt}{72pt}\bodyfont  #2}
+      {\fontsize{28pt}{70pt}\thinfont #1}{\fontsize{30pt}{72pt}\headingfont #2}
     };
     \node [anchor=north] at (name.south) {%
       \fontsize{14pt}{24pt}\color{header}%
